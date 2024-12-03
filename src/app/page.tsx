@@ -1,11 +1,13 @@
 "use client";
 import { createClient } from "@supabase/supabase-js";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Auth() {
 
+  const [isAppLoading, setIsAppLoading] = useState<boolean>(true)
 
   const router = useRouter()
 
@@ -15,9 +17,20 @@ export default function Auth() {
   const supabase = createClient(supabaseUrl, supabaseKey);
 
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsAppLoading(false)
+  //   },5000 )
+  // },[])
 
 
-  return (
+  return (isAppLoading ? <section className="w-full min-h-[100vh] bg-green_00 overflow-hidden flex justify-center items-center">
+    <div className="flex items-center justify-center h-fit">
+      <p className="playfair text-5xl">Mate Do</p>
+              <Image src={"/logos/mate.png"} alt="mate" width={60} height={60} quality={100} />
+
+    </div>
+  </section> :
     <section className="flex flex-col min-h-screen bg-gray-100">
       {/* Header */}
       <nav className="bg-white shadow-md p-4 flex justify-center">
@@ -32,7 +45,7 @@ export default function Auth() {
         <p className="playfairDisplay text-gray-600">
           Organiza tu día, guarda tus ideas y mantente productivo con nuestra plataforma.
         </p>
-        <div className="space-y-4 w-full max-w-xs">
+        <div className="space-y-4 w-full max-w-xs flex flex-col gap-2">
           <Link href="/login">
             <button className="w-full bg-green-600 text-white font-semibold py-2 rounded-md hover:bg-green-700 transition">
               Iniciar Sesión
