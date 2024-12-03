@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 export default {
   content: [
@@ -11,6 +12,15 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        green_00: "#285238",
+        green_01: "#366D4B",
+        green_03: "#4A9667",
+        brown_00: "#442F22",
+        brown_01: "#96674A",
+      },
+      fontFamily: {
+        playfair: ['"Playfair Display"', ...fontFamily.sans],
+        playfairDisplay: ['"Playfair"', ...fontFamily.sans],
       },
     },
   },

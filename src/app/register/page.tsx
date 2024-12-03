@@ -1,41 +1,58 @@
 "use client";
 import { createClient } from "@supabase/supabase-js";
-import { supabase } from "@/context/supabase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { supabase } from "@/context/supabase";
 
-export default function Login() {
+
+export default function Register() {
 
   const [formData, setFormData] = useState<{
+    name: string,
+    lastname: string,
     email: string;
     password: string;
+    passwordC: string;
   }>({
+    name: "",
+    lastname: "",
     email: "",
     password: "",
+    passwordC: "",
   });
+
 
   const router = useRouter()
 
 
+  const handleFormChange =  (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+        ...formData,
+        [e.target.name]: e.target.value, 
+      })
+  }
 
-  const login = async () => { 
+  const register = async () => { 
 
-    let { data, error } = await supabase.auth.signInWithPassword({
-      email: formData.email,
-      password: formData.password,
-    })
+    let { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+            data: {
+              first_name: formData.name,
+              last_name: formData.lastname,
+            },
+          },
+      })
 
     if (error) {
       console.log("🚀  ~ login error:", error) 
     } else {
     console.log("🚀  ~ login success:", data)
-    const { data: { user } } = await supabase.auth.getUser()
-    if(user){
-      router.push("/home")
+    router.push("/login")
     }
   }
-}
 
   useEffect(() => {
     console.log("🚀  ~ formData:", formData)
@@ -56,12 +73,46 @@ export default function Login() {
       {/* Formulario */}
       <div className="flex-grow flex justify-center items-center px-6">
         <form
-          action={login}
+          action={register}
           className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md space-y-6"
         >
           <h2 className="text-2xl font-bold text-gray-800 text-center">
             Iniciar Sesión
           </h2>
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="name"
+              className="text-sm font-medium text-gray-600"
+            >
+                Nombre
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              onChange={(e) => handleFormChange(e)}   
+              required
+              className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:ring-2 focus:ring-green-500 outline-none"
+              placeholder="Nombres"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="lastname"
+              className="text-sm font-medium text-gray-600"
+            >
+              Apellido
+            </label>
+            <input
+              type="text"
+              id="lastname"
+              name="lastname"
+              onChange={(e) => handleFormChange(e)}   
+              required
+              className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:ring-2 focus:ring-green-500 outline-none"
+              placeholder="Apellidos"
+            />
+          </div>
           <div className="flex flex-col gap-2">
             <label
               htmlFor="email"
@@ -73,7 +124,7 @@ export default function Login() {
               type="email"
               id="email"
               name="email"
-              onChange={(e) => setFormData({email: e.target.value, password: formData.password})}
+              onChange={(e) => handleFormChange(e)}   
               required
               className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:ring-2 focus:ring-green-500 outline-none"
               placeholder="ejemplo@correo.com"
@@ -90,21 +141,37 @@ export default function Login() {
               type="password"
               id="password"
               name="password"
-              onChange={(e) => setFormData({email: formData.email, password: e.target.value})}
+              onChange={(e) => handleFormChange(e)}   
+              required
+              className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:ring-2 focus:ring-green-500 outline-none"
+              placeholder="********"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="passwordC"
+              className="text-sm font-medium text-gray-600"
+            >
+              Repetir contraseña
+            </label>
+            <input
+              type="password"
+              id="passwordC"
+              name="passwordC"
+              onChange={(e) => handleFormChange(e)}   
               required
               className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:ring-2 focus:ring-green-500 outline-none"
               placeholder="********"
             />
           </div>
           <button
-            onClick={login}
+          type="submit"
             className="w-full bg-green-600 text-white font-semibold py-2 rounded-md hover:bg-green-700 transition"
           >
-            Iniciar Sesión
+           r
           </button>
           <div className="text-center flex flex-col gap-2">
             <a
-              href="/register"
               className="text-sm text-blue-500 hover:underline"
             >
              <span className="text-black"> ¿No tienes una cuenta? </span>Registrate aquí.
@@ -126,4 +193,4 @@ export default function Login() {
       </footer>
     </section>
   );
-  }
+}
