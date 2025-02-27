@@ -17,16 +17,16 @@ export default function Auth() {
   const supabase = createClient(supabaseUrl, supabaseKey);
 
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsAppLoading(false)
-  //   },5000 )
-  // },[])
+  useEffect(() => {
+    setTimeout(() => {
+      setIsAppLoading(false)
+    },5000 )
+  },[])
 
 
   return (isAppLoading ? <section className="w-full min-h-[100vh] bg-green_00 overflow-hidden flex justify-center items-center">
     <div className="flex items-center justify-center h-fit">
-      <p className="playfair text-5xl">Mate Do</p>
+      <p className="playfair-d-400 text-5xl">Mate Do</p>
               <Image src={"/logos/mate.png"} alt="mate" width={60} height={60} quality={100} />
 
     </div>

@@ -19,3 +19,12 @@ body {
   background: var(--background);
 }
 
+
+
+
+.playfair-d-400 {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

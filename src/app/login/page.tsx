@@ -1,9 +1,12 @@
 "use client";
-import { createClient } from "@supabase/supabase-js";
 import { supabase } from "@/context/supabase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Alert } from "@mui/material";
+import AlertTitle from '@mui/material/AlertTitle';
+
+
 
 export default function Login() {
 
@@ -14,6 +17,8 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [isError, setIsError] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
   const router = useRouter()
 
@@ -27,9 +32,14 @@ export default function Login() {
     })
 
     if (error) {
-      console.log("🚀  ~ login error:", error) 
+     if(error.message === "Invalid login credentials"){
+      setErrorMessage("La contraseña es incorrecta")
+     } 
+     setIsError(true)
+     setTimeout(() => {
+       setIsError(false);
+     }, 5000); 
     } else {
-    console.log("🚀  ~ login success:", data)
     const { data: { user } } = await supabase.auth.getUser()
     if(user){
       router.push("/home")
@@ -37,12 +47,12 @@ export default function Login() {
   }
 }
 
-  useEffect(() => {
-    console.log("🚀  ~ formData:", formData)
-  }, [formData]);
-
   return (
-    <section className="flex flex-col min-h-screen bg-gray-100">
+    <section className="flex flex-col min-h-screen bg-gray-100 relative">
+            {isError && <Alert className="absolute top-0 right-0 w-fit" severity="error">
+  <AlertTitle>Error</AlertTitle>
+  {errorMessage}
+</Alert>}
       {/* Header */}
       <nav className="bg-white shadow-md p-4 flex items-center">
         <Link href="/" className="text-green-600 font-bold text-2xl">
@@ -54,6 +64,7 @@ export default function Login() {
       </nav>
 
       {/* Formulario */}
+
       <div className="flex-grow flex justify-center items-center px-6">
         <form
           action={login}
@@ -124,6 +135,8 @@ export default function Login() {
         &copy; {new Date().getFullYear()} Mate Do Login. Todos los derechos
         reservados.
       </footer>
+
+
     </section>
   );
   }
