@@ -49,11 +49,7 @@ export default function Home() {
     }
   }
 
-
-
-  useEffect(() => {
     getUser()
-  },[])
 
   
   return (

@@ -23,6 +23,8 @@ export default {
         playfairDisplay: ['"Playfair"', ...fontFamily.sans],
       },
     },
-  },
-  plugins: [],
+  }, 
+    plugins: [
+      require('tailwindcss-animated')
+    ],
 } satisfies Config;
