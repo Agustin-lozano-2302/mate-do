@@ -4,9 +4,11 @@ import { supabase } from "@/context/supabase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import MateLoader from "@/components/screenLoader";
+import Image from "next/image";
 
 export default function Login() {
-
+  const [loading, setLoading] = useState(true)
   const [formData, setFormData] = useState<{
     email: string;
     password: string;
@@ -37,9 +39,22 @@ export default function Login() {
   }
 }
 
-  useEffect(() => {
-    console.log("🚀  ~ formData:", formData)
-  }, [formData]);
+useEffect(() => {
+  // Simular tiempo de carga inicial
+  const timer = setTimeout(() => {
+    setLoading(false)
+    // Aquí puedes redirigir a la ruta principal de tu app
+    // router.push('/dashboard')
+  }, 3000) // 2 segundos de splash screen
+
+  return () => clearTimeout(timer)
+}, [])
+
+if (loading) {
+  return <MateLoader />
+}
+
+
 
   return (
     <section className="flex flex-col min-h-screen bg-gray-100">
@@ -48,6 +63,7 @@ export default function Login() {
         <Link href="/" className="text-green-600 font-bold text-2xl">
           ←
         </Link>
+        <Image src={"/logos/mate.png"} alt="mate" width={40} height={40} quality={100} />
         <h1 className="flex-grow text-center text-xl font-semibold text-gray-700">
           Mate Do Login
         </h1>

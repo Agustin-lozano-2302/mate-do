@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { supabase } from "@/context/supabase";
+import RegistroAlertModal from "@/components/registerAlert/registerAlert";
 
 
 export default function Register() {
@@ -21,6 +22,8 @@ export default function Register() {
     password: "",
     passwordC: "",
   });
+
+  const [isAlertOpen, setIsAlertOpen] = useState<boolean>(false)
 
 
   const router = useRouter()
@@ -50,15 +53,21 @@ export default function Register() {
       console.log("🚀  ~ login error:", error) 
     } else {
     console.log("🚀  ~ login success:", data)
-    router.push("/login")
+    setIsAlertOpen(true)
     }
   }
+
+  const redirectToLogin = () => {
+    router.push("/login")
+  } 
 
   useEffect(() => {
     console.log("🚀  ~ formData:", formData)
   }, [formData]);
 
   return (
+    <>
+    <RegistroAlertModal onClose={() => setIsAlertOpen(false)} isOpen={isAlertOpen} redirectLogin={redirectToLogin} />
     <section className="flex flex-col min-h-screen bg-gray-100">
       {/* Header */}
       <nav className="bg-white shadow-md p-4 flex items-center">
@@ -168,7 +177,7 @@ export default function Register() {
           type="submit"
             className="w-full bg-green-600 text-white font-semibold py-2 rounded-md hover:bg-green-700 transition"
           >
-           r
+           Resgistrate
           </button>
           <div className="text-center flex flex-col gap-2">
             <a
@@ -192,5 +201,6 @@ export default function Register() {
         reservados.
       </footer>
     </section>
+</>
   );
 }
