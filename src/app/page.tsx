@@ -1,23 +1,13 @@
 "use client";
 import MateLoader from "@/components/screenLoader";
-import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Auth() {
 
 
   const [loading, setLoading] = useState(true)
-
-
-  const router = useRouter()
-
-
-  const supabaseUrl = process.env.NEXT_PUBLIC_PROJECT_URL || "";
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY || "";
-  const supabase = createClient(supabaseUrl, supabaseKey);
 
 
 
