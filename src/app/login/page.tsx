@@ -1,11 +1,12 @@
 "use client";
-import { createClient } from "@supabase/supabase-js";
 import { supabase } from "@/context/supabase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import MateLoader from "@/components/screenLoader";
 import Image from "next/image";
+import AlertaPopup from "@/components/alert";
+import { IAlertaPopupProps } from "@/interface/Alert-Interface";
 
 export default function Login() {
   const [loading, setLoading] = useState(true)
@@ -17,7 +18,30 @@ export default function Login() {
     password: "",
   });
 
+  const [showAlert, setShowAlert] = useState(false)
+
+  const [customAlert, setCustomAlert] = useState<IAlertaPopupProps>({
+    message: "",
+    type: "info"
+  });
+
   const router = useRouter()
+
+
+  const showMessage = (error: string) => {
+    if(error === "Email not confirmed") {
+    setCustomAlert({
+      message: "Necesitas verificar tu mail",
+      type: "warning"
+    })
+  } else {
+    setCustomAlert({
+      message: "Correo o contraseña incorrecta",
+      type: "error"
+    })
+  }
+    setShowAlert(true)
+  }
 
 
 
@@ -29,7 +53,8 @@ export default function Login() {
     })
 
     if (error) {
-      console.log("🚀  ~ login error:", error) 
+      console.log("🚀  ~ login error:", error)
+      showMessage(error.message)
     } else {
     console.log("🚀  ~ login success:", data)
     const { data: { user } } = await supabase.auth.getUser()
@@ -59,6 +84,13 @@ if (loading) {
   return (
     <section className="flex flex-col min-h-screen bg-gray-100">
       {/* Header */}
+      {showAlert && (
+        <AlertaPopup
+          message={customAlert.message}
+          type={customAlert.type}
+          onClose={() => setShowAlert(false)}
+        />
+      )}
       <nav className="bg-white shadow-md p-4 flex items-center">
         <Link href="/" className="text-green-600 font-bold text-2xl">
           ←
