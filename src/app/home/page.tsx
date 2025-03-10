@@ -1,9 +1,7 @@
 "use client";
 import Todos from "@/components/todos";
 import { supabase } from "@/context/supabase";
-import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -35,25 +33,28 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   const getUser = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser()
-      if(user) {
-        setLocalUser({...user.user_metadata as UserMetadata, id: user.id})
-      } else {0
-        localStorage.clear()
-        router.push("/login")
+    const { data: { user } } = await supabase.auth.getUser()
+    if(user) {
+      setUser(user.user_metadata as UserMetadata)
+    } else {
+      if (typeof window !== 'undefined') {
+        window.localStorage.clear()
       }
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const logout = () => {
-    if(localUser) {
-      localStorage.clear()
       router.push("/login")
     }
   }
+
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (!error) {
+      if (typeof window !== 'undefined') {
+        window.localStorage.clear()
+      }
+
+      router.push("/login")
+    }
+  }
+
 
   useEffect(()=> {
     getUser()

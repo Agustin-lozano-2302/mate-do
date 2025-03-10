@@ -10,6 +10,14 @@ export default function Auth() {
   const [loading, setLoading] = useState(true)
 
 
+  const router = useRouter()
+
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+
 
   useEffect(() => {
     // Simular tiempo de carga inicial
@@ -17,10 +25,22 @@ export default function Auth() {
       setLoading(false)
       // Aquí puedes redirigir a la ruta principal de tu app
       // router.push('/dashboard')
-    }, 3000) // 2 segundos de splash screen
+    }, 1000) // 2 segundos de splash screen
   
     return () => clearTimeout(timer)
   }, [])
+  
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Solo ejecutar código relacionado con Supabase en el cliente
+      const initSupabase = async () => {
+        const { data: { user } } = await supabase.auth.getUser();
+        // ... resto de tu lógica
+      };
+      
+      initSupabase();
+    }
+  }, []);
   
   if (loading) {
     return <MateLoader />
