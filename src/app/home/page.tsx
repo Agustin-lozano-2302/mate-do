@@ -35,7 +35,7 @@ export default function Home() {
   const getUser = async () => {
     const { data: { user } } = await supabase.auth.getUser()
     if(user) {
-      setUser(user.user_metadata as UserMetadata)
+      setLocalUser(user.user_metadata as UserMetadata)
     } else {
       if (typeof window !== 'undefined') {
         window.localStorage.clear()
