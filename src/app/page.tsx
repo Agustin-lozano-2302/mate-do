@@ -1,9 +1,7 @@
 "use client";
 import MateLoader from "@/components/screenLoader";
-import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Auth() {
