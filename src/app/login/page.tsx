@@ -19,10 +19,7 @@ export default function Login() {
 
   const router = useRouter()
 
-
-
   const login = async () => { 
-
     let { data, error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
@@ -39,6 +36,19 @@ export default function Login() {
   }
 }
 
+const handleGoogleLogin = async () => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${window.location.origin}/home`
+    }
+  });
+
+  if (error) {
+    console.log("🚀 ~ Google login error:", error);
+  }
+};
+
 useEffect(() => {
   // Simular tiempo de carga inicial
   const timer = setTimeout(() => {
@@ -54,8 +64,6 @@ if (loading) {
   return <MateLoader />
 }
 
-
-
   return (
     <section className="flex flex-col min-h-screen bg-gray-100">
       {/* Header */}
@@ -63,10 +71,12 @@ if (loading) {
         <Link href="/" className="text-green-600 font-bold text-2xl">
           ←
         </Link>
+        <div className="flex items-center gap-3">
         <Image src={"/logos/mate.png"} alt="mate" width={40} height={40} quality={100} />
         <h1 className="flex-grow text-center text-xl font-semibold text-gray-700">
           Mate Do Login
         </h1>
+        </div>
       </nav>
 
       {/* Formulario */}
@@ -111,6 +121,25 @@ if (loading) {
               className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:ring-2 focus:ring-green-500 outline-none"
               placeholder="********"
             />
+          </div>
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 font-semibold py-2 rounded-md hover:bg-gray-50 transition"
+          >
+            <Image 
+              src="/icons/google.svg" 
+              alt="Google" 
+              width={20} 
+              height={20} 
+            />
+            Continuar con Google
+          </button>
+          <div className="relative my-4">
+            <hr className="border-gray-300" />
+            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-gray-500 text-sm">
+              o
+            </span>
           </div>
           <button
             onClick={login}

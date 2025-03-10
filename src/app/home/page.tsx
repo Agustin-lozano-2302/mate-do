@@ -1,8 +1,6 @@
 "use client";
 import { supabase } from "@/context/supabase";
-import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -37,19 +35,26 @@ export default function Home() {
     if(user) {
       setUser(user.user_metadata as UserMetadata)
     } else {
-      localStorage.clear()
+      if (typeof window !== 'undefined') {
+        window.localStorage.clear()
+      }
       router.push("/login")
     }
   }
 
-  const logout =  () => {
-    if(user) {
-      localStorage.clear()
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (!error) {
+      if (typeof window !== 'undefined') {
+        window.localStorage.clear()
+      }
       router.push("/login")
     }
   }
 
+  useEffect(() => {
     getUser()
+  }, [])
 
   
   return (
