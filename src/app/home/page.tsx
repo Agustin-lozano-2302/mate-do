@@ -33,18 +33,21 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   const getUser = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
-    if(user) {
-      setLocalUser(user.user_metadata as UserMetadata)
-      setIsLoading(false)
-    } else {
-      if (typeof window !== 'undefined') {
-        window.localStorage.clear()
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if(user) {
+        setLocalUser({...user.user_metadata as UserMetadata, id: user.id})
+      } else {0
+        if (typeof window !== 'undefined') {
+          window.localStorage.clear()
+        }
+         router.push("/login")
       }
-      router.push("/login")
+    } finally{
+      setIsLoading(false)
     }
   }
-
   const logout = async () => {
     const { error } = await supabase.auth.signOut()
     if (!error) {
