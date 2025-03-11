@@ -70,7 +70,7 @@ export default function Home() {
   }
 
   return (
-    <section className="flex flex-col min-h-screen bg-gray-100">
+    <section className="flex flex-col min-h-screen bg-gray-100 font-serif">
       {/* Header */}
       <nav className="bg-white shadow-md p-4 flex gap-2 relative items-center">
       <LogoTitle title="Mate Do" />

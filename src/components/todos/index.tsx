@@ -94,7 +94,7 @@ export default function Todos({ user }: TodosProps) {
   }, []);
 
   return (
-    <div className="flex-grow flex flex-col items-center px-6 py-8 relative">
+    <div className="flex-grow flex flex-col items-center px-6 py-8 relative font-serif">
       <h1 className="text-2xl font-bold mb-6 text-black">Mis Tareas</h1>
       <div className="w-full max-w-md mx-auto">
         {/* Lista de tareas */}
@@ -149,7 +149,7 @@ export default function Todos({ user }: TodosProps) {
             ))}
           </ul>
         ) : (
-          <div className="text-center py-10">
+          <div className="text-center py-10 font-serif">
             <div className="text-gray-400 text-6xl mb-4">📝</div>
             <h3 className="text-xl font-semibold text-gray-600 mb-2">No hay tareas pendientes</h3>
             <p className="text-gray-500">¡Comienza agregando una nueva tarea!</p>
@@ -167,7 +167,7 @@ export default function Todos({ user }: TodosProps) {
 
       {/* Modal de Vista */}
       {isViewModalOpen && selectedTodo && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 font-serif">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Detalles de la Tarea</h2>
             <div className="space-y-4">
@@ -182,14 +182,14 @@ export default function Todos({ user }: TodosProps) {
                 </div>
               )}
               {selectedTodo.category && (
-                <div>
+                <div className="font-serif">
                   <h3 className="text-sm font-medium text-green-600">Categoría</h3>
                   <span className="mt-1 inline-block bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">
                     {selectedTodo.category}
                   </span>
                 </div>
               )}
-              <div>
+              <div className="font-serif">
                 <h3 className="text-sm font-medium text-green-600">Estado</h3>
                 <p className="mt-1">
                   {selectedTodo.is_completed ? "Completada" : "Pendiente"}

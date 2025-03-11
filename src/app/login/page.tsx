@@ -91,7 +91,7 @@ if (loading) {
 }
 
   return (
-    <section className="flex flex-col min-h-screen bg-gray-100">
+    <section className="flex flex-col min-h-screen bg-gray-100 font-serif">
       {/* Header */}
       {showAlert && (
         <AlertaPopup
