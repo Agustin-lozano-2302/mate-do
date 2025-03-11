@@ -67,7 +67,7 @@ export default function Register() {
   return (
     <>
     <RegistroAlertModal onClose={() => setIsAlertOpen(false)} isOpen={isAlertOpen} redirectLogin={redirectToLogin} />
-    <section className="flex flex-col min-h-screen bg-gray-100">
+    <section className="flex flex-col min-h-screen bg-gray-100 font-serif">
       {/* Header */}
       <nav className="bg-white shadow-md p-4 flex items-center">
         <Link href="/" className="text-green-600 font-bold text-2xl">
