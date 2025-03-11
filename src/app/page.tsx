@@ -1,4 +1,5 @@
 "use client";
+import LogoTitle from "@/components/logoTitle";
 import MateLoader from "@/components/screenLoader";
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
@@ -50,11 +51,10 @@ export default function Auth() {
 
 
   return (
-    <section className="flex flex-col min-h-screen bg-gray-100">
+    <section className="flex flex-col min-h-screen bg-gray-100 font-serif">
       {/* Header */}
       <nav className="bg-white shadow-md p-4 flex justify-center items-center">
-      <Image src={"/logos/mate.png"} alt="mate" width={40} height={40} quality={100} />
-        <h1 className="text-2xl font-bold text-green-600">Mate Do Auth</h1>
+      <LogoTitle title="Mate Do" />
       </nav>
 
       {/* Contenido Principal */}
@@ -65,7 +65,7 @@ export default function Auth() {
         <p className="playfairDisplay text-gray-600">
           Organiza tu día, guarda tus ideas y mantente productivo con nuestra plataforma.
         </p>
-        <div className="space-y-4 w-full max-w-xs">
+        <div className=" w-full max-w-xs flex flex-col gap-2">
           <Link href="/login">
             <button className="w-full bg-green-600 text-white font-semibold py-2 rounded-md hover:bg-green-700 transition">
               Iniciar Sesión

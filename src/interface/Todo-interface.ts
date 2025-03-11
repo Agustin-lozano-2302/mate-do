@@ -3,4 +3,6 @@ export interface ITodo {
     task: string;
     is_completed:boolean;
     user_id: number;
+    description: string;
+    category: string
 }

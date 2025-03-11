@@ -7,6 +7,7 @@ import MateLoader from "@/components/screenLoader";
 import Image from "next/image";
 import AlertaPopup from "@/components/alert";
 import { IAlertaPopupProps } from "@/interface/Alert-Interface";
+import LogoTitle from "@/components/logoTitle";
 
 export default function Login() {
   const [loading, setLoading] = useState(true)
@@ -99,16 +100,11 @@ if (loading) {
           onClose={() => setShowAlert(false)}
         />
       )}
-      <nav className="bg-white shadow-md p-4 flex items-center">
-        <Link href="/" className="text-green-600 font-bold text-2xl">
+      <nav className="bg-white shadow-md p-4 flex items-center justify-center">
+        <Link href="/" className="text-green-600 font-bold text-2xl absolute left-4">
           ←
         </Link>
-        <div className="flex items-center gap-3">
-        <Image src={"/logos/mate.png"} alt="mate" width={40} height={40} quality={100} />
-        <h1 className="flex-grow text-center text-xl font-semibold text-gray-700">
-          Mate Do Login
-        </h1>
-        </div>
+       <LogoTitle title="Mate Do Login" />
       </nav>
 
       {/* Formulario */}
