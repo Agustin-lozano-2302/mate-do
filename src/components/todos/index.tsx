@@ -212,7 +212,7 @@ export default function Todos({ user }: TodosProps) {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4">Nueva Tarea</h2>
+            <h2 className="text-xl font-bold mb-4 text-black">Nueva Tarea</h2>
             <form onSubmit={addTodo} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -222,7 +222,7 @@ export default function Todos({ user }: TodosProps) {
                   type="text"
                   value={newTodo.title}
                   onChange={(e) => setNewTodo({...newTodo, title: e.target.value})}
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md text-black"
                   maxLength={30}
                   required
                 />
@@ -235,7 +235,7 @@ export default function Todos({ user }: TodosProps) {
                 <textarea
                   value={newTodo.description}
                   onChange={(e) => setNewTodo({...newTodo, description: e.target.value})}
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md text-black"
                   rows={3}
                   maxLength={50}
                 />
@@ -249,7 +249,7 @@ export default function Todos({ user }: TodosProps) {
                   <select
                     value={newTodo.category}
                     onChange={(e) => setNewTodo({...newTodo, category: e.target.value as Category})}
-                    className="w-full p-2 border border-gray-300 rounded-md appearance-none pr-8"
+                    className="w-full p-2 border border-gray-300 rounded-md appearance-none pr-8 text-black"
                     required
                   >
                     <option value="">Selecciona una categoría</option>
