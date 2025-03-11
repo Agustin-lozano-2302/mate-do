@@ -1,4 +1,5 @@
 "use client";
+import LogoTitle from "@/components/logoTitle";
 import Todos from "@/components/todos";
 import { supabase } from "@/context/supabase";
 import Image from "next/image";
@@ -72,8 +73,7 @@ export default function Home() {
     <section className="flex flex-col min-h-screen bg-gray-100">
       {/* Header */}
       <nav className="bg-white shadow-md p-4 flex gap-2 relative items-center">
-        <Image src={"/logos/mate.png"} alt="mate" width={40} height={40} quality={100} />
-        <p className="text-black font-bold mt-2">Mate Do</p>
+      <LogoTitle title="Mate Do" />
         <div className="absolute right-5 flex items-center gap-2">
           <div className="relative">
             <Image 
@@ -108,10 +108,11 @@ export default function Home() {
       {/* Contenido Principal */}
        {localUser.id && <Todos user={localUser} />}
 
-      {/* Footer */}
+      {/* Footer 
       <footer className="bg-white text-center text-sm p-4 border-t">
         &copy; {new Date().getFullYear()} Mate Do Auth. Todos los derechos reservados.
       </footer>
+      */}
     </section>
   );
 }
