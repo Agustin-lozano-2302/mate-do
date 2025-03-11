@@ -1,7 +1,7 @@
 import { supabase } from "@/context/supabase";
 import { ITodo } from "@/interface/Todo-interface";
 import { UserMetadata } from "@supabase/supabase-js";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type TodosProps = {
@@ -241,23 +241,28 @@ export default function Todos({ user }: TodosProps) {
                 />
                 <span className="text-xs text-gray-500">{newTodo.description.length}/50 caracteres</span>
               </div>
-              <div>
+              <div className="relative">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Categoría
                 </label>
-                <select
-                  value={newTodo.category}
-                  onChange={(e) => setNewTodo({...newTodo, category: e.target.value as Category})}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                  required
-                >
-                  <option value="">Selecciona una categoría</option>
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select
+                    value={newTodo.category}
+                    onChange={(e) => setNewTodo({...newTodo, category: e.target.value as Category})}
+                    className="w-full p-2 border border-gray-300 rounded-md appearance-none pr-8"
+                    required
+                  >
+                    <option value="">Selecciona una categoría</option>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                    <ChevronDown className="h-4 w-4 text-gray-500" />
+                  </div>
+                </div>
               </div>
               <div className="flex justify-end gap-2 mt-4">
                 <button
