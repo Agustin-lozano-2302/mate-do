@@ -68,7 +68,6 @@ export default function Register() {
     <>
     <RegistroAlertModal onClose={() => setIsAlertOpen(false)} isOpen={isAlertOpen} redirectLogin={redirectToLogin} />
     <section className="flex flex-col min-h-screen bg-gray-100 font-serif">
-      {/* Header */}
       <nav className="bg-white shadow-md p-4 flex items-center">
         <Link href="/" className="text-green-600 font-bold text-2xl">
           ←
@@ -77,15 +76,13 @@ export default function Register() {
           Mate Do Login
         </h1>
       </nav>
-
-      {/* Formulario */}
-      <div className="flex-grow flex justify-center items-center px-6">
+      <div className="flex-grow flex justify-center items-center p-8">
         <form
           action={register}
           className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md space-y-6"
         >
           <h2 className="text-2xl font-bold text-gray-800 text-center">
-            Iniciar Sesión
+            Registrate
           </h2>
           <div className="flex flex-col gap-2">
             <label
@@ -193,10 +190,8 @@ export default function Register() {
           </div>
         </form>
       </div>
-
-      {/* Footer */}
       <footer className="bg-white text-center text-sm p-4 border-t">
-        &copy; {new Date().getFullYear()} Mate Do Login. Todos los derechos
+        &copy; {new Date().getFullYear()} Mate Do. Todos los derechos
         reservados.
       </footer>
     </section>
