@@ -1,28 +1,32 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { X } from "lucide-react"
+import { useState, useEffect } from "react";
+import { X } from "lucide-react";
 
 interface RegistroAlertModalProps {
-  isOpen: boolean
-  onClose: () => void
-  redirectLogin: () => void
+  isOpen: boolean;
+  onClose: () => void;
+  redirectLogin: () => void;
 }
 
-export default function RegistroAlertModal({ isOpen, onClose, redirectLogin }: RegistroAlertModalProps) {
-  const [isVisible, setIsVisible] = useState(false)
+export default function RegistroAlertModal({
+  isOpen,
+  onClose,
+  redirectLogin,
+}: RegistroAlertModalProps) {
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
-      setIsVisible(true)
+      setIsVisible(true);
     } else {
       setTimeout(() => {
-        setIsVisible(false)
-      }, 300)
+        setIsVisible(false);
+      }, 300);
     }
-  }, [isOpen])
+  }, [isOpen]);
 
-  if (!isOpen && !isVisible) return null
+  if (!isOpen && !isVisible) return null;
 
   return (
     <div
@@ -31,7 +35,10 @@ export default function RegistroAlertModal({ isOpen, onClose, redirectLogin }: R
       }`}
     >
       <div className="relative w-full max-w-md bg-white rounded-lg shadow-lg p-6">
-        <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+        >
           <X size={20} />
           <span className="sr-only">Cerrar</span>
         </button>
@@ -54,9 +61,12 @@ export default function RegistroAlertModal({ isOpen, onClose, redirectLogin }: R
             </svg>
           </div>
 
-          <h3 className="text-xl font-bold mb-2">¡Tu registro ya casi está listo!</h3>
+          <h3 className="text-xl font-bold mb-2">
+            ¡Tu registro ya casi está listo!
+          </h3>
           <p className="text-gray-600 mb-6">
-            Solo tienes que revisar tu correo y verificar tu cuenta para completar el proceso.
+            Solo tienes que revisar tu correo y verificar tu cuenta para
+            completar el proceso.
           </p>
 
           <button
@@ -68,6 +78,5 @@ export default function RegistroAlertModal({ isOpen, onClose, redirectLogin }: R
         </div>
       </div>
     </div>
-  )
+  );
 }
-

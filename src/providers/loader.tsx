@@ -15,12 +15,11 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(false)
   const pathname = usePathname()
 
-  // Detectar cambios de ruta para mostrar el loader
   useEffect(() => {
     setIsLoading(true)
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 500) // Tiempo mínimo de loading
+    }, 2000)
 
     return () => clearTimeout(timer)
   }, [pathname])

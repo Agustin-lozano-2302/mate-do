@@ -1,22 +1,18 @@
 "use client"
-import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import MainSection from "@/components/mainSection";
+import { supabase } from "@/context/supabase";
 
 
 export default function Home() {
 
   const [todos, setTodos] = useState<any[]>()
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-  const supabase = createClient(supabaseUrl, supabaseKey);
 
   const fetchNotes = async () => {
     const { data, error } = await supabase.from("todos").select("*");
 
     if (error) {
-      console.log("🚀 ~ fetchNotes ~ error:", error);
       return [];
     }
     setTodos(data)
@@ -32,7 +28,6 @@ export default function Home() {
       console.log("🚀 ~ postNotes ~ error:", error);
       return [];
     }
-    console.log("🚀 ~ postNotess ~ data:", data)
   };
 
   useEffect(() => {

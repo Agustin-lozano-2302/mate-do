@@ -5,8 +5,6 @@ return (
     <div className="flex flex-col gap-3">
       <p>Crear la nota</p>
       <p className="text-red-500">Inhabilitado</p>
-      {/* <input type="text" />
-      <button>Crear</button> */}
     </div>
     <div className="my-4 flex flex-col gap-4">
       <p>Notas:</p>

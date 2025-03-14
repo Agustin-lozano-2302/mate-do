@@ -1,5 +1,7 @@
 "use client";
+import BurgerMenu from "@/components/burgerMenu";
 import LogoTitle from "@/components/logoTitle";
+import MateLoader from "@/components/screenLoader";
 import Todos from "@/components/todos";
 import { supabase } from "@/context/supabase";
 import Image from "next/image";
@@ -66,12 +68,11 @@ export default function Home() {
   },[])
 
   if (isLoading) {
-    return <div className="text-black">Cargando...</div> // O tu componente de loading
+    return <MateLoader /> 
   }
 
   return (
-    <section className="flex flex-col min-h-screen bg-gray-100 font-serif">
-      {/* Header */}
+    <section className="flex flex-col min-h-screen bg-gray-100 ">
       <nav className="bg-white shadow-md p-4 flex gap-2 relative items-center">
       <LogoTitle title="Mate Do" />
         <div className="absolute right-5 flex items-center gap-2">
@@ -86,33 +87,12 @@ export default function Home() {
               onClick={() => setShowMenu(!showMenu)}
             />
             {showMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
-                <div className="px-4 py-2 border-b">
-                  <p className="text-sm text-black font-semibold">
-                  {localUser.first_name}
-                  </p>
-                </div>
-                <button
-                  onClick={logout}
-                  className="w-full text-left px-4 py-2 text-sm text-black hover:bg-gray-100 flex items-center gap-2 font-semibold justify-between"
-                >
-                  Cerrar sesión
-                  <Image src={"/icons/logout.png"} alt="logout" width={20} height={20} quality={100} />
-                </button>
-              </div>
+              <BurgerMenu logout={logout} localUser={localUser} />
             )}
           </div>
         </div>
       </nav>
-
-      {/* Contenido Principal */}
        {localUser.id && <Todos user={localUser} />}
-
-      {/* Footer 
-      <footer className="bg-white text-center text-sm p-4 border-t">
-        &copy; {new Date().getFullYear()} Mate Do Auth. Todos los derechos reservados.
-      </footer>
-      */}
     </section>
   );
 }
