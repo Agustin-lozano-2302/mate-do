@@ -56,7 +56,7 @@ export default function ResetPassword() {
           onSubmit={handleResetPassword}
           className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md space-y-6"
         >
-          <h2 className="text-2xl font-bold text-gray-800 text-center max-w-min">
+          <h2 className="text-2xl font-bold text-gray-800 text-center ">
             Recuperar Contraseña
           </h2>
           <div className="flex flex-col gap-2">
