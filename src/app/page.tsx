@@ -1,17 +1,15 @@
 "use client";
 import Button from "@/components/button";
+import Footer from "@/components/footer";
 import LogoTitle from "@/components/logoTitle";
 import MateLoader from "@/components/screenLoader";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/context/supabase";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Auth() {
   const [loading, setLoading] = useState(true);
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-  const supabase = createClient(supabaseUrl, supabaseKey);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -38,7 +36,7 @@ export default function Auth() {
   }
 
   return (
-    <section className="flex flex-col min-h-screen bg-gray-100 font-serif">
+    <section className="flex flex-col min-h-screen bg-gray-100 ">
       <nav className="bg-white shadow-md p-4 flex justify-center items-center">
         <LogoTitle title="Mate Do" />
       </nav>
@@ -63,10 +61,7 @@ export default function Auth() {
           </Link>
         </div>
       </div>
-      <footer className="bg-white text-center text-sm p-4 border-t">
-        &copy; {new Date().getFullYear()} Mate Do. Todos los derechos
-        reservados.
-      </footer>
+      <Footer />
     </section>
   );
 }

@@ -1,9 +1,5 @@
 import Image from "next/image";
-
-interface ILogoTitle {
-    title: string;
-    customStyles?: boolean;
-}
+import { ILogoTitle } from "@/components/logoTitle/ILogoTitle-interface";
 
 export default function LogoTitle ({title, customStyles = false}: ILogoTitle) {
     return(
