@@ -45,7 +45,7 @@ export default function ResetPassword() {
           onClose={() => setShowAlert(false)}
         />
       )}
-      <nav className="bg-white shadow-md p-4 flex items-center">
+      <nav className="bg-white shadow-md p-4 flex items-center justify-center">
         <Link href="/login" className="text-green-600 font-bold text-2xl absolute left-4">
           ←
         </Link>
@@ -54,9 +54,9 @@ export default function ResetPassword() {
       <div className="flex-grow flex justify-center items-center p-6">
         <form
           onSubmit={handleResetPassword}
-          className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md space-y-6"
+          className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md space-y-6"
         >
-          <h2 className="text-2xl font-bold text-gray-800 text-center">
+          <h2 className="text-2xl font-bold text-gray-800 text-center max-w-min">
             Recuperar Contraseña
           </h2>
           <div className="flex flex-col gap-2">
