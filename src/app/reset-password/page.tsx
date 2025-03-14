@@ -49,7 +49,7 @@ export default function ResetPassword() {
         <Link href="/login" className="text-green-600 font-bold text-2xl absolute left-4">
           ←
         </Link>
-        <LogoTitle title="Recuperar Contraseña" />
+        <LogoTitle customStyles={true} title="Recuperar Contraseña" />
       </nav>
       <div className="flex-grow flex justify-center items-center p-6">
         <form
