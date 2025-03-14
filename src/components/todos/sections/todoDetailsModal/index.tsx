@@ -13,7 +13,7 @@ export default function TodoDetailsModal({  setIsViewModalOpen, selectedTodo }: 
               {selectedTodo.description && (
                 <div>
                   <h3 className="text-sm font-medium text-green-600">Descripción</h3>
-                  <p className="mt-1 max-w-full h-24 overflow-y-auto break-words">{selectedTodo.description}</p>
+                  <p className="mt-1 max-w-full max-h-24 overflow-y-auto break-words">{selectedTodo.description}</p>
                 </div>
               )}
               {selectedTodo.category && (

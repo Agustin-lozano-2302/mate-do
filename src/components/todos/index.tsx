@@ -101,7 +101,7 @@ export default function Todos({ user }: TodosProps) {
         <Plus size={24} />
       </button>
       {isViewModalOpen && selectedTodo && (
-        <TodoDetailsModal isViewModalOpen={isViewModalOpen} selectedTodo={selectedTodo} setIsViewModalOpen={setIsModalOpen} />
+        <TodoDetailsModal isViewModalOpen={isViewModalOpen} selectedTodo={selectedTodo} setIsViewModalOpen={setIsViewModalOpen} />
       )}
       {isModalOpen && (
       <TodoModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} newTodo={newTodo} setNewTodo={setNewTodo} addTodo={addTodo}  />
