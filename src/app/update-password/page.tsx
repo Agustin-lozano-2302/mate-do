@@ -37,28 +37,27 @@ export default function UpdatePassword() {
       return;
     }
 
-    try {
+
       const { error } = await supabase.auth.updateUser({
         password: newPassword
       });
 
-      if (error) throw error;
+      if (error) {
+        setAlertMessage({
+            message: error.message === "New password should be different from the old password." 
+              ? "Debes poner una contraseña diferente a la anterior"
+              : "Error al actualizar la contraseña",
+            type: "error" as IAlertType
+          });
+          setShowAlert(true);
+      }
 
       setAlertMessage({
         message: "Contraseña actualizada correctamente",
         type: "success" as IAlertType
       });
       setShowAlert(true);
-      
-      // Redirigir después de 2 segundos
-      setTimeout(() => router.push("/login"), 2000);
-    } catch (error) {
-      setAlertMessage({
-        message: "Error al actualizar la contraseña",
-        type: "error" as IAlertType
-      });
-      setShowAlert(true);
-    }
+      setTimeout(() => router.push("/login"), 3000);  
   };
 
   return (
