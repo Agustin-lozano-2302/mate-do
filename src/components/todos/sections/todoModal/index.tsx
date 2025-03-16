@@ -2,12 +2,22 @@ import { Category, ITodoModalProps } from "@/components/todos/ITodo-interface";
 import { categories } from "@/constants/categories";
 import { ChevronDown } from "lucide-react";
 
-export default function TodoModal({ isModalOpen, setIsModalOpen, newTodo, setNewTodo, addTodo }: ITodoModalProps) {
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+export default function TodoModal({ 
+  setIsModalOpen, 
+  newTodo, 
+  setNewTodo, 
+  onSubmit,  
+  isEditing 
+}: ITodoModalProps) {
+  
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg p-6 w-full max-w-md">
-        <h2 className="text-xl font-bold mb-4 text-black">Nueva Tarea</h2>
-        <form onSubmit={addTodo} className="space-y-4">
+        <h2 className="text-xl font-bold mb-4 text-black">
+          {isEditing ? "Editar Tarea" : "Nueva Tarea"}
+        </h2>
+        
+        <form onSubmit={onSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Título
@@ -20,6 +30,7 @@ export default function TodoModal({ isModalOpen, setIsModalOpen, newTodo, setNew
               required
             />
           </div>
+          
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Descripción
@@ -31,6 +42,7 @@ export default function TodoModal({ isModalOpen, setIsModalOpen, newTodo, setNew
               rows={3}
             />
           </div>
+
           <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Categoría
@@ -54,6 +66,18 @@ export default function TodoModal({ isModalOpen, setIsModalOpen, newTodo, setNew
               </div>
             </div>
           </div>
+          <div>
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    Due Date & Time
+  </label>
+  <input
+    type="datetime-local"
+    value={newTodo.due_date}
+    onChange={(e) => setNewTodo({ ...newTodo, due_date: e.target.value })}
+    className="w-full p-2 border border-gray-300 rounded-md text-black"
+  />
+</div>
+
           <div className="flex justify-end gap-2 mt-4">
             <button
               type="button"
@@ -64,15 +88,15 @@ export default function TodoModal({ isModalOpen, setIsModalOpen, newTodo, setNew
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+              className={`px-4 py-2 rounded-md text-white ${
+                "bg-green-500 hover:bg-green-600"
+              }`}
             >
-              Agregar
+              {isEditing ? "Guardar Cambios" : "Agregar"}
             </button>
           </div>
         </form>
       </div>
     </div>
-    );
-  }
-  
-  
+  );
+}

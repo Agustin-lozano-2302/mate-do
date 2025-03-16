@@ -3,7 +3,7 @@ import TodoItem from "@/components/todos/sections/todoItem";
 import { ITodo } from "@/interface/Todo-interface";
 import { Trash2 } from "lucide-react";
 
-export default function TodoList({ todos, toggleTodo, deleteTodo, setSelectedTodo, setIsViewModalOpen }: ITodoListProps) {
+export default function TodoList({ todos, toggleTodo, deleteTodo, setSelectedTodo, setIsViewModalOpen,openEditModal }: ITodoListProps) {
 
 
   const truncateText = (text: string, maxLength: number) => {
@@ -73,7 +73,23 @@ export default function TodoList({ todos, toggleTodo, deleteTodo, setSelectedTod
               {todo.category as Category}
             </span>
           )}
+          {todo.due_date && (
+  <span className="text-sm text-gray-500 ml-8 mt-1 ">
+    📅 {new Date(todo.due_date).toLocaleString()}
+  </span>
+)}
+
         </div>
+        <div className="flex gap-2">
+        <button
+  onClick={(e) => {
+    e.stopPropagation();
+    openEditModal(todo);
+  }}
+  className="text-blue-500 hover:text-blue-700"
+>
+  ✏️
+</button>
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -83,6 +99,9 @@ export default function TodoList({ todos, toggleTodo, deleteTodo, setSelectedTod
         >
           <Trash2 size={20} />
         </button>
+   
+</div>
+
       </li>
     ))}
   </ul>

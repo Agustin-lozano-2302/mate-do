@@ -4,5 +4,6 @@ export interface ITodo {
     is_completed:boolean;
     user_id: number;
     description: string;
-    category: string
+    category: string;
+    due_date: string;
 }
