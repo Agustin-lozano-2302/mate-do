@@ -14,6 +14,7 @@ export interface ITodoListProps {
   deleteTodo: (todo: ITodo) => void;
   setSelectedTodo: (todo: ITodo) => void;
   setIsViewModalOpen: (isOpen: boolean) => void;
+  openEditModal: (todo: ITodo) => void
 }
 
 export interface ITodoItemProps {
@@ -25,15 +26,16 @@ export interface ITodoItemProps {
 }
 
 export interface ITodoModalProps {
-  isModalOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
-  newTodo: { title: string; description: string; category: Category };
+  newTodo: { title: string; description: string; category: Category; due_date: string };
   setNewTodo: (todo: {
     title: string;
     description: string;
     category: Category;
+    due_date: string;
   }) => void;
-  addTodo: (e: React.FormEvent) => void;
+  onSubmit: (e: React.FormEvent) => Promise<void>;
+  isEditing: boolean;
 }
 
 export interface ITodoDetailsModalProps {
