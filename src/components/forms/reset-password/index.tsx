@@ -2,8 +2,10 @@ import { supabase } from "@/context/supabase";
 import { IAlertType } from "@/interface/Alert-Interface";
 import { useState } from "react";
 import { IAuthForm } from "@/interface/AuthForms-interface";
+import { useTranslation } from "react-i18next";
 
-export default function PasswordResetForm ({setCustomAlert,setIsAlertOpen} : IAuthForm) {
+export default function PasswordResetForm({ setCustomAlert, setIsAlertOpen }: IAuthForm) {
+    const { t } = useTranslation();
     const [email, setEmail] = useState("");
     const handleResetPassword = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -15,13 +17,13 @@ export default function PasswordResetForm ({setCustomAlert,setIsAlertOpen} : IAu
           if (error) throw error;
     
           setCustomAlert({
-            message: "Revisa tu correo para cambiar la contraseña",
+            message: t('auth.resetPassword.subtitle'),
             type: "success" as IAlertType
           });
           setIsAlertOpen(true);
         } catch (error) {
             setCustomAlert({
-            message: "Error al enviar el correo de recuperación",
+            message: t('auth.resetPassword.errors.sendError'),
             type: "error" as IAlertType
           });
           setIsAlertOpen(true);
@@ -31,14 +33,14 @@ export default function PasswordResetForm ({setCustomAlert,setIsAlertOpen} : IAu
         <div className="flex-grow flex justify-center items-center p-6">
         <form
           onSubmit={handleResetPassword}
-          className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md space-y-6"
+          className="bg-gray-100   rounded-lg p-6 w-full max-w-md space-y-6"
         >
           <h2 className="text-2xl font-bold text-gray-800 text-center ">
-            Recuperar Contraseña
+            {t('auth.resetPassword.title')}
           </h2>
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-gray-600">
-              Correo Electrónico
+              {t('auth.email')}
             </label>
             <input
               type="email"
@@ -46,14 +48,14 @@ export default function PasswordResetForm ({setCustomAlert,setIsAlertOpen} : IAu
               onChange={(e) => setEmail(e.target.value)}
               required
               className="border border-gray-300 rounded-md px-4 py-2"
-              placeholder="ejemplo@correo.com"
+              placeholder={t('auth.placeholders.email')}
             />
           </div>
           <button
             type="submit"
             className="w-full bg-green-600 text-white font-semibold py-2 rounded-md hover:bg-green-700"
           >
-            Enviar Correo de Recuperación
+            {t('auth.resetPassword.submitButton')}
           </button>
         </form>
       </div>

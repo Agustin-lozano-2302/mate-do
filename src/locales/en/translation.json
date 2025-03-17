@@ -1,0 +1,118 @@
+{
+  "common": {
+    "today": "Today",
+    "all": "All",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "logout": "Logout",
+    "loading": "Loading..."
+  },
+  "emptyState": {
+    "title": "No tasks pending",
+    "message": "Start adding a new task!"
+  },
+  "tasks": {
+    "title": "My Tasks",
+    "add": "Add task",
+    "empty": "No tasks",
+    "details": {
+      "title": "Task Details",
+      "fields": {
+        "title": "Title",
+        "description": "Description",
+        "category": "Category",
+        "status": "Status",
+        "dateTime": "Date and time"
+      }
+    },
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending"
+    },
+    "navigation": {
+      "today": "Today",
+      "all": "All"
+    },
+    "categories": {
+      "personal": "Personal",
+      "work": "Work",
+      "study": "Study",
+      "home": "Home"
+    },
+    "calendar": {
+      "prev": "Previous",
+      "next": "Next",
+      "today": "Today"
+    },
+    "modal": {
+      "newTask": "New Task",
+      "editTask": "Edit Task",
+      "selectCategory": "Select a category",
+      "addButton": "Add",
+      "saveChanges": "Save Changes"
+    }
+  },
+  "auth": {
+    "title": "The best app to create your notes",
+    "description": "Organize your day, save your ideas and stay productive with our platform.",
+    "loginTitle": "Login",
+    "registerTitle": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "forgotPassword": "Forgot your password?",
+    "submitLogin": "Sign In",
+    "submitRegister": "Sign Up",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "successRegister": "Registration Successful",
+    "successMessage": "Your account has been created successfully. Please sign in to continue.",
+    "name": "Name",
+    "lastname": "Last name",
+    "placeholders": {
+      "email": "example@email.com",
+      "password": "********",
+      "name": "Names",
+      "lastname": "Last names"
+    },
+    "errors": {
+      "emailNotConfirmed": "You need to verify your email",
+      "invalidCredentials": "Invalid email or password"
+    },
+    "google": {
+      "continue": "Continue with Google"
+    },
+    "or": "or",
+    "resetPassword": {
+      "title": "Reset Password",
+      "subtitle": "Check your email to change your password",
+      "submitButton": "Send Recovery Email",
+      "errors": {
+        "sendError": "Error sending recovery email"
+      }
+    },
+    "updatePassword": {
+      "title": "Update Password",
+      "newPassword": "New Password",
+      "confirmNewPassword": "Confirm Password",
+      "submitButton": "Update Password",
+      "success": "Password updated successfully",
+      "errors": {
+        "passwordMismatch": "Passwords do not match",
+        "samePassword": "New password must be different from the old one",
+        "updateError": "Error updating password"
+      }
+    },
+    "registerAlert": {
+      "close": "Close",
+      "title": "Your registration is almost ready!",
+      "message": "You just need to check your email and verify your account to complete the process.",
+      "confirmButton": "Got it!"
+    }
+  }
+} 

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { IAlertaPopupProps } from "@/interface/Alert-Interface";
 import { AlertIcon } from "@/constants/alerts";
+import { t } from "i18next";
 
 export default function AlertaPopup({
   message,
@@ -50,7 +51,7 @@ export default function AlertaPopup({
           }}
           aria-label="Close"
         >
-          <span className="sr-only">Cerrar</span>
+          <span className="sr-only">{t('common.close')}</span>
           <X className="w-5 h-5" />
         </button>
       </div>
