@@ -7,6 +7,10 @@ import TodoModal from "./sections/todoModal";
 import TodoDetailsModal from "./sections/todoDetailsModal";
 import TodoList from "./sections/todoList";
 import EmpthyState from "./sections/empthyState";
+import CalendarView from "../calendarView";
+import { format, addDays, isEqual } from "date-fns"
+import { Button } from "@/components/ui/button";
+import { es } from "date-fns/locale";
 
 type TodosProps = {
   user: UserMetadata;
@@ -104,33 +108,123 @@ export default function Todos({ user }: TodosProps) {
     setIsModalOpen(true);
   };
 
+
+  const [viewMode, setViewMode] = useState<"list" | "calendar" | "all">("list");
+
+
   useEffect(() => {
     getTodos();
   }, []);
 
+  const [selectedDate, setSelectedDate] = useState(new Date())
+  
+  const nextDays = Array.from({ length: 14 }, (_, i) => addDays(new Date(), i))
+  
+  const todosForSelectedDate = todos?.filter(todo => 
+    isEqual(new Date(todo.due_date).setHours(0,0,0,0), selectedDate.setHours(0,0,0,0))
+  )
+
+  const resetForm = () => {
+    setNewTodo({
+      title: "",
+      description: "",
+      category: "" as Category,
+      due_date: ""
+    });
+    setIsEditing(false);
+    setSelectedTodo(null);
+  };
+
   return (
-    <div className="flex-grow flex flex-col items-center px-6 py-8 relative ">
-      <h1 className="text-2xl font-bold mb-6 text-black">Mis Tareas</h1>
-      <div className="w-full max-w-md mx-auto">
-        {todos && todos.length > 0 ? (
-          <TodoList
-            setSelectedTodo={setSelectedTodo}
-            setIsViewModalOpen={setIsViewModalOpen}
-            todos={todos}
-            toggleTodo={toggleTodo}
-            deleteTodo={deleteTodo}
-            openEditModal={openEditModal}
-          />
-        ) : (
-          <EmpthyState />
-        )}
-      </div>
+    <div className="flex-grow flex flex-col items-center px-6 py-8 relative">      
+      {viewMode === "list" ? (
+        <>
+          <div className="w-full max-w-md mb-6">
+            <div className="overflow-x-auto pb-2 h-28">
+              <div className="flex gap-2">
+                {nextDays.map((date) => (
+                  <Button
+                    key={date.toISOString()}
+                    variant={isEqual(date.setHours(0,0,0,0), selectedDate.setHours(0,0,0,0)) ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedDate(date)}
+                    className="min-w-[100px] min-h-[70px]"
+                  >
+                    <div className="flex flex-col items-center">
+                      <span className="text-xs">{format(date, "EEE", { locale: es })}</span>
+                      <span className="text-lg font-bold">{format(date, "d")}</span>
+                      <span className="text-xs">{format(date, "MMM", { locale: es })}</span>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full max-w-md">
+            {todos && todos.length > 0 && todosForSelectedDate && todosForSelectedDate.length > 0 ? (
+              <TodoList 
+                openEditModal={openEditModal} 
+                setSelectedTodo={setSelectedTodo} 
+                setIsViewModalOpen={setIsViewModalOpen} 
+                todos={todosForSelectedDate} 
+                toggleTodo={toggleTodo} 
+                deleteTodo={deleteTodo} 
+              />
+            ) : (
+              <EmpthyState />
+            )}
+          </div>
+        </>
+      ) : viewMode === "calendar" ? (
+        <div className="w-full max-w-md">
+          <CalendarView todos={todos} />
+        </div>
+      ) : (
+        <div className="w-full max-w-md">
+          {todos && todos.length > 0 ? (
+            <TodoList 
+              openEditModal={openEditModal} 
+              setSelectedTodo={setSelectedTodo} 
+              setIsViewModalOpen={setIsViewModalOpen} 
+              todos={todos} 
+              toggleTodo={toggleTodo} 
+              deleteTodo={deleteTodo} 
+            />
+          ) : (
+            <EmpthyState />
+          )}
+        </div>
+      )}
       <button
-        onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-8 right-8 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+        onClick={() => {
+          resetForm();
+          setIsModalOpen(true);
+        }}
+        className="fixed bottom-20 right-8 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
       >
         <Plus size={24} />
       </button>
+      <div className="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-200 flex justify-around items-center px-6">
+        <Button
+          variant={viewMode === "list" ? "default" : "ghost"}
+          onClick={() => setViewMode("list")}
+          className="flex flex-col items-center gap-1"
+        >
+          <span className="text-lg">📅</span>
+          <span className="text-xs">Hoy</span>
+        </Button>
+        <Button
+          variant={viewMode === "all" ? "default" : "ghost"}
+          onClick={() => setViewMode("all")}
+          className="flex flex-col items-center gap-1"
+        >
+          <span className="text-lg">📝</span>
+          <span className="text-xs">Todas</span>
+        </Button>
+      </div>
+
+      {/* Modales */}
       {isViewModalOpen && selectedTodo && (
         <TodoDetailsModal
           isViewModalOpen={isViewModalOpen}

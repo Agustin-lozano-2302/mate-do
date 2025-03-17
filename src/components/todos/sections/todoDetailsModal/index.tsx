@@ -1,3 +1,4 @@
+import { format } from "date-fns"
 import { ITodoDetailsModalProps } from "@/components/todos/ITodo-interface";
 
 export default function TodoDetailsModal({  setIsViewModalOpen, selectedTodo }: ITodoDetailsModalProps) {
@@ -28,6 +29,12 @@ export default function TodoDetailsModal({  setIsViewModalOpen, selectedTodo }: 
                 <h3 className="text-sm font-medium text-green-600">Estado</h3>
                 <p className="mt-1">
                   {selectedTodo.is_completed ? "Completada" : "Pendiente"}
+                </p>
+              </div>
+              <div >
+                <h3 className="text-sm font-medium text-green-600">Fecha y hora</h3>
+                <p className="mt-1">
+                  {format(new Date(selectedTodo.due_date), "dd/MM/yyyy HH:mm")}
                 </p>
               </div>
               <div className="flex justify-end gap-2 mt-6">

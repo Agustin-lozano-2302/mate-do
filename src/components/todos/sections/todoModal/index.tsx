@@ -68,7 +68,7 @@ export default function TodoModal({
           </div>
           <div>
   <label className="block text-sm font-medium text-gray-700 mb-1">
-    Due Date & Time
+    Fecha y hora
   </label>
   <input
     type="datetime-local"
