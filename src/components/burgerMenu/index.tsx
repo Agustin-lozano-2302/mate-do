@@ -11,8 +11,6 @@ export default function BurgerMenu ({localUser, logout}: IBurgerMenu) {
           {localUser.first_name}
           </p>
         </div>
-        <div className="px-4 py-2 border-b">
-        </div>
         <button
           onClick={logout}
           className="w-full text-left px-4 py-2 text-sm text-black hover:bg-gray-100 flex items-center gap-2 font-semibold justify-between"
