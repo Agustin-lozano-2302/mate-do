@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Loader2 } from 'lucide-react';
 import { baseStyles, sizes, variants } from '@/constants/buttons';
+import { t } from 'i18next';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
@@ -37,7 +38,7 @@ export default function Button({
       {isLoading ? (
         <>
           <Loader2 className="animate-spin" size={size === 'sm' ? 16 : size === 'lg' ? 24 : 20} />
-          Cargando...
+          {t('common.loading')}
         </>
       ) : (
         <>

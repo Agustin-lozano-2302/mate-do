@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface RegistroAlertModalProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ export default function RegistroAlertModal({
   onClose,
   redirectLogin,
 }: RegistroAlertModalProps) {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function RegistroAlertModal({
           className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
         >
           <X size={20} />
-          <span className="sr-only">Cerrar</span>
+          <span className="sr-only">{t('auth.registerAlert.close')}</span>
         </button>
 
         <div className="text-center">
@@ -62,18 +64,17 @@ export default function RegistroAlertModal({
           </div>
 
           <h3 className="text-xl font-bold mb-2">
-            ¡Tu registro ya casi está listo!
+            {t('auth.registerAlert.title')}
           </h3>
           <p className="text-gray-600 mb-6">
-            Solo tienes que revisar tu correo y verificar tu cuenta para
-            completar el proceso.
+            {t('auth.registerAlert.message')}
           </p>
 
           <button
             onClick={redirectLogin}
             className="w-full py-3 px-4 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
           >
-            ¡Entendido!
+            {t('auth.registerAlert.confirmButton')}
           </button>
         </div>
       </div>

@@ -5,6 +5,7 @@ import LogoTitle from "@/components/logoTitle";
 import { IAlertaPopupProps, IAlertType } from "@/interface/Alert-Interface";
 import BackArrow from "@/components/backArrow";
 import PasswordResetForm from "@/components/forms/reset-password";
+import LanguageSwitcher from "@/components/translator/TranlatorButton";
 
 export default function ResetPassword() {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -21,9 +22,11 @@ export default function ResetPassword() {
           onClose={() => setIsAlertOpen(false)}
         />
       )}
-      <nav className="bg-white shadow-md p-4 flex items-center justify-center">
+      <nav className="bg-white shadow-md p-4 flex items-center justify-between">
         <BackArrow link="/login" />
-        <LogoTitle title="Mate Do" />
+        <LogoTitle customStyles={true} title="Mate Do" />
+        <LanguageSwitcher />
+
       </nav>
       <PasswordResetForm setIsAlertOpen={setIsAlertOpen} setCustomAlert={setCustomAlert} />
     </section>

@@ -3,8 +3,10 @@ import { IAlertType } from "@/interface/Alert-Interface";
 import { useState } from "react";
 import { IAuthForm } from "@/interface/AuthForms-interface";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
-export default function PasswordUpdateForm ({setCustomAlert,setIsAlertOpen} : IAuthForm) {
+export default function PasswordUpdateForm({ setCustomAlert, setIsAlertOpen }: IAuthForm) {
+    const { t } = useTranslation();
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -16,7 +18,7 @@ export default function PasswordUpdateForm ({setCustomAlert,setIsAlertOpen} : IA
     
         if (newPassword !== confirmPassword) {
           setCustomAlert({
-            message: "Las contraseñas no coinciden",
+            message: t('auth.updatePassword.errors.passwordMismatch'),
             type: "error" as IAlertType,
           });
           setIsAlertOpen(true);
@@ -29,11 +31,9 @@ export default function PasswordUpdateForm ({setCustomAlert,setIsAlertOpen} : IA
     
         if (error) {
           setCustomAlert({
-            message:
-              error.message ===
-              "New password should be different from the old password."
-                ? "Debes poner una contraseña diferente a la anterior"
-                : "Error al actualizar la contraseña",
+            message: error.message === "New password should be different from the old password."
+              ? t('auth.updatePassword.errors.samePassword')
+              : t('auth.updatePassword.errors.updateError'),
             type: "error" as IAlertType,
           });
           setIsAlertOpen(true);
@@ -41,7 +41,7 @@ export default function PasswordUpdateForm ({setCustomAlert,setIsAlertOpen} : IA
         }
     
         setCustomAlert({
-          message: "Contraseña actualizada correctamente",
+          message: t('auth.updatePassword.success'),
           type: "success" as IAlertType,
         });
         setIsAlertOpen(true);
@@ -54,16 +54,16 @@ export default function PasswordUpdateForm ({setCustomAlert,setIsAlertOpen} : IA
         <div className="flex-grow flex justify-center items-center p-6">
         <form
           onSubmit={handleUpdatePassword}
-          className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md space-y-6"
+          className="bg-white   rounded-lg p-8 w-full max-w-md space-y-6"
         >
           <h2 className="text-2xl font-bold text-gray-800 text-center">
-            Nueva Contraseña
+            {t('auth.updatePassword.title')}
           </h2>
 
           <div className="space-y-4">
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-600">
-                Nueva Contraseña
+                {t('auth.updatePassword.newPassword')}
               </label>
               <input
                 type="password"
@@ -71,13 +71,13 @@ export default function PasswordUpdateForm ({setCustomAlert,setIsAlertOpen} : IA
                 onChange={(e) => setNewPassword(e.target.value)}
                 required
                 className="border border-gray-300 rounded-md px-4 py-2"
-                placeholder="********"
+                placeholder={t('auth.placeholders.password')}
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-600">
-                Confirmar Contraseña
+                {t('auth.updatePassword.confirmNewPassword')}
               </label>
               <input
                 type="password"
@@ -85,7 +85,7 @@ export default function PasswordUpdateForm ({setCustomAlert,setIsAlertOpen} : IA
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 className="border border-gray-300 rounded-md px-4 py-2"
-                placeholder="********"
+                placeholder={t('auth.placeholders.password')}
               />
             </div>
           </div>
@@ -94,7 +94,7 @@ export default function PasswordUpdateForm ({setCustomAlert,setIsAlertOpen} : IA
             type="submit"
             className="w-full bg-green-600 text-white font-semibold py-2 rounded-md hover:bg-green-700"
           >
-            Actualizar Contraseña
+            {t('auth.updatePassword.submitButton')}
           </button>
         </form>
       </div>

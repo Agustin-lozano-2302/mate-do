@@ -6,6 +6,7 @@ import AlertaPopup from "@/components/alert";
 import LogoTitle from "@/components/logoTitle";
 import { IAlertaPopupProps, IAlertType } from "@/interface/Alert-Interface";
 import PasswordUpdateForm from "@/components/forms/update-password";
+import LanguageSwitcher from "@/components/translator/TranlatorButton";
 
 export default function UpdatePassword() {
 
@@ -40,8 +41,10 @@ export default function UpdatePassword() {
     <section className="flex flex-col min-h-screen bg-gray-100 ">
       {isOpenAlert && <AlertaPopup {...customAlert} onClose={() => setIsAlertOpen(false)} />}
       
-      <nav className="bg-white shadow-md p-4">
+      <nav className="bg-white shadow-md p-4 flex items-center justify-between">
         <LogoTitle title="Actualizar Contraseña" />
+        <LanguageSwitcher />
+
       </nav>
       <PasswordUpdateForm setIsAlertOpen={setIsAlertOpen} setCustomAlert={setCustomAlert} />
     </section>

@@ -2,10 +2,12 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { supabase } from "@/context/supabase";
 import { IAuthForm } from "@/interface/AuthForms-interface";
+import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 
 export default function RegisterForm ({ setIsAlertOpen} : IAuthForm) {
-
+    const { t } = useTranslation();
     const [formData, setFormData] = useState<{
         name: string,
         lastname: string,
@@ -53,17 +55,17 @@ export default function RegisterForm ({ setIsAlertOpen} : IAuthForm) {
         <div className="flex-grow flex justify-center items-center p-8">
         <form
           action={register}
-          className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md space-y-6"
+          className="bg-gray-100   rounded-lg p-8 w-full max-w-md space-y-6"
         >
           <h2 className="text-2xl font-bold text-gray-800 text-center">
-            Registrate
+            {t('auth.registerTitle')}
           </h2>
           <div className="flex flex-col gap-2">
             <label
               htmlFor="name"
               className="text-sm font-medium text-gray-600"
             >
-                Nombre
+                {t('auth.name')}
             </label>
             <input
               type="text"
@@ -80,7 +82,7 @@ export default function RegisterForm ({ setIsAlertOpen} : IAuthForm) {
               htmlFor="lastname"
               className="text-sm font-medium text-gray-600"
             >
-              Apellido
+              {t('auth.lastname')}
             </label>
             <input
               type="text"
@@ -97,7 +99,7 @@ export default function RegisterForm ({ setIsAlertOpen} : IAuthForm) {
               htmlFor="email"
               className="text-sm font-medium text-gray-600"
             >
-              Correo Electrónico
+              {t('auth.email')}
             </label>
             <input
               type="email"
@@ -114,7 +116,7 @@ export default function RegisterForm ({ setIsAlertOpen} : IAuthForm) {
               htmlFor="password"
               className="text-sm font-medium text-gray-600"
             >
-              Contraseña
+              {t('auth.password')}
             </label>
             <input
               type="password"
@@ -131,7 +133,7 @@ export default function RegisterForm ({ setIsAlertOpen} : IAuthForm) {
               htmlFor="passwordC"
               className="text-sm font-medium text-gray-600"
             >
-              Repetir contraseña
+              {t('auth.confirmPassword')}
             </label>
             <input
               type="password"
@@ -147,20 +149,13 @@ export default function RegisterForm ({ setIsAlertOpen} : IAuthForm) {
           type="submit"
             className="w-full bg-green-600 text-white font-semibold py-2 rounded-md hover:bg-green-700 transition"
           >
-           Resgistrate
+           {t('auth.submitRegister')}
           </button>
           <div className="text-center flex flex-col gap-2">
-            <a
-              className="text-sm text-blue-500 hover:underline"
-            >
-             <span className="text-black"> ¿No tienes una cuenta? </span>Registrate aquí.
-            </a>
-            <a
-              href="/reset-password"
-              className="text-sm text-blue-500 hover:underline"
-            >
-              Olvidé mi contraseña
-            </a>
+          <Link href="/login" className="text-sm ">  <span className="text-black">{t('auth.hasAccount')}</span>
+          <span className="text-blue-500 hover:underline">      {t('auth.signIn')}</span></Link>
+            <Link href="/reset-password" className="text-sm ">
+            <span className="text-blue-500 hover:underline">{t('auth.forgotPassword')}</span></Link>
           </div>
         </form>
       </div>

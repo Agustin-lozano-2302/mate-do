@@ -1,0 +1,118 @@
+{
+  "common": {
+    "today": "Hoy",
+    "all": "Todas",
+    "close": "Cerrar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "logout": "Cerrar sesión",
+    "loading": "Cargando..."
+  },
+  "emptyState": {
+    "title": "No hay tareas pendientes",
+    "message": "¡Comienza agregando una nueva tarea!"
+  },
+  "tasks": {
+    "title": "Mis Tareas",
+    "add": "Agregar tarea",
+    "empty": "No hay tareas",
+    "details": {
+      "title": "Detalles de la Tarea",
+      "fields": {
+        "title": "Título",
+        "description": "Descripción",
+        "category": "Categoría",
+        "status": "Estado",
+        "dateTime": "Fecha y hora"
+      }
+    },
+    "status": {
+      "completed": "Completada",
+      "pending": "Pendiente"
+    },
+    "navigation": {
+      "today": "Hoy",
+      "all": "Todas"
+    },
+    "categories": {
+      "personal": "Personal",
+      "work": "Trabajo",
+      "study": "Estudio",
+      "home": "Hogar"
+    },
+    "calendar": {
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "today": "Hoy"
+    },
+    "modal": {
+      "newTask": "Nueva Tarea",
+      "editTask": "Editar Tarea",
+      "selectCategory": "Selecciona una categoría",
+      "addButton": "Agregar",
+      "saveChanges": "Guardar Cambios"
+    }
+  },
+  "auth": {
+    "title": "La mejor app para crear tus notas",
+    "description": "Organiza tu día, guarda tus ideas y mantente productivo con nuestra plataforma.",
+    "loginTitle": "Iniciar Sesión",
+    "registerTitle": "Crear Cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "submitLogin": "Iniciar Sesión",
+    "submitRegister": "Registrarse",
+    "noAccount": "¿No tienes una cuenta?",
+    "hasAccount": "¿Ya tienes una cuenta?",
+    "signUp": "Regístrate",
+    "signIn": "Inicia sesión",
+    "successRegister": "Registro exitoso",
+    "successMessage": "Tu cuenta ha sido creada exitosamente. Por favor, inicia sesión para continuar.",
+    "name": "Nombre",
+    "lastname": "Apellido",
+    "placeholders": {
+      "email": "ejemplo@correo.com",
+      "password": "********",
+      "name": "Nombres",
+      "lastname": "Apellidos"
+    },
+    "errors": {
+      "emailNotConfirmed": "Necesitas verificar tu mail",
+      "invalidCredentials": "Correo o contraseña incorrecta"
+    },
+    "google": {
+      "continue": "Continuar con Google"
+    },
+    "or": "o",
+    "resetPassword": {
+      "title": "Recuperar Contraseña",
+      "subtitle": "Revisa tu correo para cambiar la contraseña",
+      "submitButton": "Enviar Correo de Recuperación",
+      "errors": {
+        "sendError": "Error al enviar el correo de recuperación"
+      }
+    },
+    "updatePassword": {
+      "title": "Actualizar Contraseña",
+      "newPassword": "Nueva Contraseña",
+      "confirmNewPassword": "Confirmar Contraseña",
+      "submitButton": "Actualizar Contraseña",
+      "success": "Contraseña actualizada correctamente",
+      "errors": {
+        "passwordMismatch": "Las contraseñas no coinciden",
+        "samePassword": "Debes poner una contraseña diferente a la anterior",
+        "updateError": "Error al actualizar la contraseña"
+      }
+    },
+    "registerAlert": {
+      "close": "Cerrar",
+      "title": "¡Tu registro ya casi está listo!",
+      "message": "Solo tienes que revisar tu correo y verificar tu cuenta para completar el proceso.",
+      "confirmButton": "¡Entendido!"
+    }
+  }
+} 

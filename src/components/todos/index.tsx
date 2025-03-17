@@ -7,10 +7,10 @@ import TodoModal from "./sections/todoModal";
 import TodoDetailsModal from "./sections/todoDetailsModal";
 import TodoList from "./sections/todoList";
 import EmpthyState from "./sections/empthyState";
-import CalendarView from "../calendarView";
 import { format, addDays, isEqual, subDays } from "date-fns"
 import { Button } from "@/components/ui/button";
 import { es } from "date-fns/locale";
+import { useTranslation } from "react-i18next";
 
 type TodosProps = {
   user: UserMetadata;
@@ -19,6 +19,7 @@ type TodosProps = {
 type Category = "Personal" | "Trabajo" | "Estudio" | "Hogar";
 
 export default function Todos({ user }: TodosProps) {
+  const { t } = useTranslation();
   const [todos, setTodos] = useState<ITodo[]>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
@@ -154,32 +155,32 @@ export default function Todos({ user }: TodosProps) {
         <>
           <div className="w-full max-w-md mb-6">
             <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-bold text-black">Mis Tareas</h1>
-            <div className="flex gap-2 items-center">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={goToPrevDays}
-                className="border-gray-100"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={goToToday}
-                className="border-gray-100"
-              >
-                Hoy
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={goToNextDays}
-                className="border-gray-100"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
+              <h1 className="text-2xl font-bold text-black">{t('tasks.title')}</h1>
+              <div className="flex gap-2 items-center">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={goToPrevDays}
+                  className="border-gray-100"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={goToToday}
+                  className="border-gray-100"
+                >
+                  {t('tasks.calendar.today')}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={goToNextDays}
+                  className="border-gray-100"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
               </div>
             </div>
             <div className="overflow-x-auto pb-2 h-28">
@@ -220,7 +221,6 @@ export default function Todos({ user }: TodosProps) {
         </>
       ) : viewMode === "calendar" ? (
         <div className="w-full max-w-md">
-          <CalendarView todos={todos} />
         </div>
       ) : (
         <div className="w-full max-w-md">
@@ -249,20 +249,20 @@ export default function Todos({ user }: TodosProps) {
       </button>
       <div className="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-200 flex justify-around items-center px-6">
         <Button
-          variant={viewMode === "list" ? "default" : "ghost"}
+          variant={"ghost"}
           onClick={() => setViewMode("list")}
           className="flex flex-col items-center gap-1"
         >
           <span className="text-lg">📅</span>
-          <span className="text-xs">Hoy</span>
+          <span className="text-xs">{t('tasks.navigation.today')}</span>
         </Button>
         <Button
-          variant={viewMode === "all" ? "default" : "ghost"}
+          variant={"ghost"}
           onClick={() => setViewMode("all")}
           className="flex flex-col items-center gap-1"
         >
           <span className="text-lg">📝</span>
-          <span className="text-xs">Todas</span>
+          <span className="text-xs">{t('tasks.navigation.all')}</span>
         </Button>
       </div>
 
@@ -283,6 +283,7 @@ export default function Todos({ user }: TodosProps) {
           isEditing={isEditing}
         />
       )}
+      
     </div>
   );
 }

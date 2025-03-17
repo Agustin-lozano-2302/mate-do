@@ -1,6 +1,7 @@
 import { Category, ITodoModalProps } from "@/components/todos/ITodo-interface";
 import { categories } from "@/constants/categories";
 import { ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function TodoModal({ 
   setIsModalOpen, 
@@ -9,18 +10,19 @@ export default function TodoModal({
   onSubmit,  
   isEditing 
 }: ITodoModalProps) {
+  const { t } = useTranslation();
   
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg p-6 w-full max-w-md">
         <h2 className="text-xl font-bold mb-4 text-black">
-          {isEditing ? "Editar Tarea" : "Nueva Tarea"}
+          {isEditing ? t('tasks.modal.editTask') : t('tasks.modal.newTask')}
         </h2>
         
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Título
+              {t('tasks.details.fields.title')}
             </label>
             <input
               type="text"
@@ -33,7 +35,7 @@ export default function TodoModal({
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Descripción
+              {t('tasks.details.fields.description')}
             </label>
             <textarea
               value={newTodo.description}
@@ -45,7 +47,7 @@ export default function TodoModal({
 
           <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Categoría
+              {t('tasks.details.fields.category')}
             </label>
             <div className="relative">
               <select
@@ -54,10 +56,10 @@ export default function TodoModal({
                 className="w-full p-2 border border-gray-300 rounded-md appearance-none pr-8 text-black"
                 required
               >
-                <option value="">Selecciona una categoría</option>
+                <option value="">{t('tasks.modal.selectCategory')}</option>
                 {categories.map((category) => (
                   <option key={category} value={category}>
-                    {category}
+                    {t(`tasks.categories.${category.toLowerCase()}`)}
                   </option>
                 ))}
               </select>
@@ -66,17 +68,18 @@ export default function TodoModal({
               </div>
             </div>
           </div>
+
           <div>
-  <label className="block text-sm font-medium text-gray-700 mb-1">
-    Fecha y hora
-  </label>
-  <input
-    type="datetime-local"
-    value={newTodo.due_date}
-    onChange={(e) => setNewTodo({ ...newTodo, due_date: e.target.value })}
-    className="w-full p-2 border border-gray-300 rounded-md text-black"
-  />
-</div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {t('tasks.details.fields.dateTime')}
+            </label>
+            <input
+              type="datetime-local"
+              value={newTodo.due_date}
+              onChange={(e) => setNewTodo({ ...newTodo, due_date: e.target.value })}
+              className="w-full p-2 border border-gray-300 rounded-md text-black"
+            />
+          </div>
 
           <div className="flex justify-end gap-2 mt-4">
             <button
@@ -84,15 +87,13 @@ export default function TodoModal({
               onClick={() => setIsModalOpen(false)}
               className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md"
             >
-              Cancelar
+              {t('common.cancel')}
             </button>
             <button
               type="submit"
-              className={`px-4 py-2 rounded-md text-white ${
-                "bg-green-500 hover:bg-green-600"
-              }`}
+              className="px-4 py-2 rounded-md text-white bg-green-500 hover:bg-green-600"
             >
-              {isEditing ? "Guardar Cambios" : "Agregar"}
+              {isEditing ? t('tasks.modal.saveChanges') : t('tasks.modal.addButton')}
             </button>
           </div>
         </form>
