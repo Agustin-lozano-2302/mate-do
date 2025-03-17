@@ -3,12 +3,14 @@ import BurgerMenu from "@/components/burgerMenu";
 import LogoTitle from "@/components/logoTitle";
 import MateLoader from "@/components/screenLoader";
 import Todos from "@/components/todos";
+import i18n from "@/context/i18n";
 import { supabase } from "@/context/supabase";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+
   type UserMetadata = {
     email: string;
     email_verified: boolean;
@@ -65,6 +67,10 @@ export default function Home() {
 
   useEffect(()=> {
     getUser()
+      const savedLanguage = localStorage.getItem("selectedLanguage");
+      if (savedLanguage) {
+        i18n.changeLanguage(savedLanguage);
+      }  
   },[])
 
   if (isLoading) {
