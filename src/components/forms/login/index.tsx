@@ -56,6 +56,8 @@ export default function LoginForm({
   };
 
   const handleGoogleLogin = async () => {
+    const currentLang = localStorage.getItem("i18nextLng") || "es";
+    localStorage.setItem("selectedLanguage", currentLang);  
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
