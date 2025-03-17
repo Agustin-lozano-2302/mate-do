@@ -1,14 +1,14 @@
 import { supabase } from "@/context/supabase";
 import { ITodo } from "@/interface/Todo-interface";
 import { UserMetadata } from "@supabase/supabase-js";
-import { Plus, Trash2, ChevronDown } from "lucide-react";
+import { Plus, Trash2, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import TodoModal from "./sections/todoModal";
 import TodoDetailsModal from "./sections/todoDetailsModal";
 import TodoList from "./sections/todoList";
 import EmpthyState from "./sections/empthyState";
 import CalendarView from "../calendarView";
-import { format, addDays, isEqual } from "date-fns"
+import { format, addDays, isEqual, subDays } from "date-fns"
 import { Button } from "@/components/ui/button";
 import { es } from "date-fns/locale";
 
@@ -96,6 +96,7 @@ export default function Todos({ user }: TodosProps) {
       setTodos(todos);
     }
   };
+  
   const openEditModal = (todo: ITodo) => {
     setSelectedTodo(todo);
     setNewTodo({
@@ -108,17 +109,29 @@ export default function Todos({ user }: TodosProps) {
     setIsModalOpen(true);
   };
 
-
   const [viewMode, setViewMode] = useState<"list" | "calendar" | "all">("list");
-
 
   useEffect(() => {
     getTodos();
   }, []);
 
   const [selectedDate, setSelectedDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(new Date())
   
-  const nextDays = Array.from({ length: 14 }, (_, i) => addDays(new Date(), i))
+  const nextDays = Array.from({ length: 14 }, (_, i) => addDays(startDate, i))
+
+  const goToPrevDays = () => {
+    setStartDate(subDays(startDate, 14))
+  }
+
+  const goToNextDays = () => {
+    setStartDate(addDays(startDate, 14))
+  }
+
+  const goToToday = () => {
+    setStartDate(new Date())
+    setSelectedDate(new Date())
+  }
   
   const todosForSelectedDate = todos?.filter(todo => 
     isEqual(new Date(todo.due_date).setHours(0,0,0,0), selectedDate.setHours(0,0,0,0))
@@ -140,6 +153,35 @@ export default function Todos({ user }: TodosProps) {
       {viewMode === "list" ? (
         <>
           <div className="w-full max-w-md mb-6">
+            <div className="flex justify-between items-center mb-4">
+            <h1 className="text-2xl font-bold text-black">Mis Tareas</h1>
+            <div className="flex gap-2 items-center">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={goToPrevDays}
+                className="border-gray-100"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={goToToday}
+                className="border-gray-100"
+              >
+                Hoy
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={goToNextDays}
+                className="border-gray-100"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+              </div>
+            </div>
             <div className="overflow-x-auto pb-2 h-28">
               <div className="flex gap-2">
                 {nextDays.map((date) => (

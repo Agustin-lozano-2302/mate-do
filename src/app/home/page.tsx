@@ -74,7 +74,7 @@ export default function Home() {
   return (
     <section className="flex flex-col min-h-screen bg-gray-100 ">
       <nav className="bg-white shadow-md p-4 flex gap-2 relative items-center">
-      <LogoTitle title="Mis tareas" />
+      <LogoTitle title="Mate Do" />
         <div className="absolute right-5 flex items-center gap-2">
           <div className="relative">
             <Image 
