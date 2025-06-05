@@ -16,7 +16,7 @@ type TodosProps = {
   user: UserMetadata;
 };
 
-type Category = "Personal" | "Trabajo" | "Estudio" | "Hogar";
+type Category = "personal" | "work" | "study" | "home";
 
 export default function Todos({ user }: TodosProps) {
   const { t } = useTranslation();

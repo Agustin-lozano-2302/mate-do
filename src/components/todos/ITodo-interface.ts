@@ -6,7 +6,7 @@ export type TodosProps = {
   user: UserMetadata;
 };
 
-export type Category = "Personal" | "Trabajo" | "Estudio" | "Hogar";
+export type Category = "personal" | "work" | "study" | "home";
 
 export interface ITodoListProps {
   todos: ITodo[];

@@ -8,7 +8,8 @@
     "save": "Guardar",
     "cancel": "Cancelar",
     "logout": "Cerrar sesión",
-    "loading": "Cargando..."
+    "loading": "Cargando...",
+    "allRightsReserved": "Todos los derechos reservados"
   },
   "emptyState": {
     "title": "No hay tareas pendientes",
@@ -40,7 +41,8 @@
       "personal": "Personal",
       "work": "Trabajo",
       "study": "Estudio",
-      "home": "Hogar"
+      "home": "Hogar",
+      "select": "Selecciona una categoría"
     },
     "calendar": {
       "prev": "Anterior",

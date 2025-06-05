@@ -8,7 +8,8 @@
     "save": "Save",
     "cancel": "Cancel",
     "logout": "Logout",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "allRightsReserved": "All rights reserved"
   },
   "emptyState": {
     "title": "No tasks pending",
@@ -40,7 +41,8 @@
       "personal": "Personal",
       "work": "Work",
       "study": "Study",
-      "home": "Home"
+      "home": "Home",
+      "select": "Select a category"
     },
     "calendar": {
       "prev": "Previous",

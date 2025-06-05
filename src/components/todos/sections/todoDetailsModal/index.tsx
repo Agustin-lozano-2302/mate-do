@@ -21,10 +21,10 @@ export default function TodoDetailsModal({  setIsViewModalOpen, selectedTodo }: 
                 </div>
               )}
               {selectedTodo.category && (
-                <div >
+                <div>
                   <h3 className="text-sm font-medium text-green-600">{t('tasks.details.fields.category')}</h3>
                   <span className="mt-1 inline-block bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">
-                    {t(`tasks.categories.${selectedTodo.category.toLowerCase()}`)}
+                    {t(`tasks.categories.${selectedTodo.category}`)}
                   </span>
                 </div>
               )}

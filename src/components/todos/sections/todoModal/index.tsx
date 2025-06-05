@@ -56,10 +56,10 @@ export default function TodoModal({
                 className="w-full p-2 border border-gray-300 rounded-md appearance-none pr-8 text-black"
                 required
               >
-                <option value="">{t('tasks.modal.selectCategory')}</option>
+                <option value="">{t('tasks.categories.select')}</option>
                 {categories.map((category) => (
                   <option key={category} value={category}>
-                    {t(`tasks.categories.${category.toLowerCase()}`)}
+                    {t(`tasks.categories.${category}`)}
                   </option>
                 ))}
               </select>

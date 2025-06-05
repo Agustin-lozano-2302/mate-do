@@ -23,13 +23,13 @@ export default function TodoList({ todos, toggleTodo, deleteTodo, setSelectedTod
 
   const getCategoryStyle = (category: Category) => {
     switch (category) {
-      case "Personal":
+      case "personal":
         return "bg-blue-100 text-blue-800";
-      case "Trabajo":
+      case "work":
         return "bg-red-100 text-red-800";
-      case "Estudio":
+      case "study":
         return "bg-yellow-100 text-yellow-800";
-      case "Hogar":
+      case "home":
         return "bg-green-100 text-green-800";
       default:
         return "bg-gray-100 text-gray-800";

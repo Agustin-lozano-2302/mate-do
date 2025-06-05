@@ -67,10 +67,6 @@ export default function Home() {
 
   useEffect(()=> {
     getUser()
-      const savedLanguage = localStorage.getItem("selectedLanguage");
-      if (savedLanguage) {
-        i18n.changeLanguage(savedLanguage);
-      }  
   },[])
 
   if (isLoading) {
